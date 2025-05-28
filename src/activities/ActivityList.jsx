@@ -30,6 +30,7 @@ function ActivityListItem({ activity }) {
     loading,
     error,
   } = useMutation("DELETE", "/activities/" + activity.id, ["activities"]);
+  <Link to={`/activities/${activity.id}`}>{activity.name}</Link>
 
   return (
     <li>

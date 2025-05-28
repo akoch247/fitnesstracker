@@ -23,6 +23,7 @@ export default function App() {
     <Route path="/register" element={<Register />} />
     <Route path="/login" element={<Login />} />
     <Route path="/activities" element={<ActivitiesPage />} />
+    <Route path="*" element={<Error404 />} />
   </Routes>
 
   return <Error404 />;
