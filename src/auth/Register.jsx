@@ -6,7 +6,6 @@ import { useNavigate, Link } from "react-router-dom";
 /** A form that allows users to register for a new account */
 export default function Register() {
   const { register } = useAuth();
-// const { setPage } = usePage();
   const navigate = useNavigate();
 
   const [error, setError] = useState(null);

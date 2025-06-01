@@ -14,7 +14,7 @@ export default function ActivitiesPage() {
     <>
       <h1>Activities</h1>
       <ActivityList />
-      {token && <ActivityForm />}
+      {token && <ActivityForm />} 
     </>
   );
 }

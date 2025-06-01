@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "./AuthContext";
-//import { usePage } from "../layout/PageContext";
 import { useNavigate, Link } from "react-router-dom";
 
 /** A form that allows users to log into an existing account. */

@@ -1,20 +1,20 @@
-import useQuery from "../api/useQuery";
+import { useAuth } from "../auth/AuthContext";
 
+import RoutineList from "./RoutineList";
+import RoutineForm from "./RoutineForm";
+
+/**
+ * All users can see a list of routines.
+ * If they are logged in, they will also see a form to create an routine.
+ */
 export default function RoutinesPage() {
-    const {
-        data: routines,
-        loading,
-        error,
-    } = userQuery("/routines", "routines");
+  const { token } = useAuth();
 
-    return (
-        <div>
-            <h1>Routines</h1>
-            <ul>
-                {routines.map((routine) => (
-                    <li key={routine.id}>{routine.name}</li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <>
+      <h1>Routines</h1>
+      <RoutineList />
+      {token && <RoutineForm />} 
+    </>
+  );
 }
