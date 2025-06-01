@@ -1,5 +1,6 @@
 import useQuery from "../api/useQuery";
 import { Link } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 
 /** Shows a list of activities. */
 export default function ActivityList() {
@@ -23,6 +24,7 @@ export default function ActivityList() {
 
 /** Shows a single activity. Logged-in users will also see a delete button. */
 function ActivityListItem({ activity }) {
+  const { token } = useAuth();
   return (
     <li>
       <Link to={`/activities/${activity.id}`}>{activity.name}</Link>

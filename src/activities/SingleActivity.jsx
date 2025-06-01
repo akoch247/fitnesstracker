@@ -10,13 +10,18 @@ export default function SingleActivity() {
     data: activity,
     loading,
     error,
-  } = useQuery(`/activities/${activityID}`, `activity-${activityID}`);
+  } = useQuery(`/activities/${activityID}`, ["activities", activityID]);
 
   const {
     mutate: deleteActivity,
-    loading: deleting,
+    loading: deleteLoading,
     error: deleteError,
   } = useMutation("DELETE", `/activities/${activityID}`, ["activities"]);
+
+  const handleDelete = async () => {
+    await deleteActivity();
+    navigate("/activities");
+  };
 
   if (loading) return <p>Loading</p>;
   if (error) return <p>Error: {error}</p>;
@@ -30,8 +35,8 @@ export default function SingleActivity() {
       <p>{activity.creator?.username}</p>
       <p>{activity.description}</p>
       {token && (
-        <button onClick={() => deleteActivity()}>
-          {deleting ? "Deleting" : "Delete"}
+        <button onClick={handleDelete}>
+          {deleteLoading ? "Deleting..." : "Delete activity"}
         </button>
       )}
     </div>

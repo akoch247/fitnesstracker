@@ -16,7 +16,7 @@ export default function ActivityForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new formData(e.target);
+    const formData = new FormData(e.target);
     addActivity(formData);
   };
 
