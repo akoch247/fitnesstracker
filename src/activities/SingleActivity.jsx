@@ -4,34 +4,36 @@ import useMutation from "../api/useMutation";
 import { useAuth } from "../auth/AuthContext";
 
 export default function SingleActivity() {
+  const { activityID } = useParams();
+  const { token } = useAuth();
+  const {
+    data: activity,
+    loading,
+    error,
+  } = useQuery(`/activities/${activityID}`, `activity-${activityID}`);
 
-  const { id } = useParams();
-  const { data: activity } = useQuery(`/activities/${id}`, `activity-${id}`);
   const {
     mutate: deleteActivity,
     loading: deleting,
     error: deleteError,
-  } = useMutation("DELETE", `/activities/${id}`, ["activities"]);
+  } = useMutation("DELETE", `/activities/${activityID}`, ["activities"]);
 
-  const handleDelete = async () => {
-    try {
-      await deleteActivity();
-      Navigate("/activities");
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  if (loading) return <p>Loading</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!activity) return <p>No activity</p>;
+
+
 
   return (
-    <section>
-      <h1>Name: {activity.name}</h1>
-      <p>Description: {activity.description}</p>
-      <p>Creator Name: {activity.creatorName}</p>
+    <div>
+      <h1>{activity.name}</h1>
+      <p>{activity.creator?.username}</p>
+      <p>{activity.description}</p>
       {token && (
-        <button onClick={handleDelete} disabled={deleting}>
-          {deleting ? "Deleting" : "Delete Activity"}
+        <button onClick={() => deleteActivity()}>
+          {deleting ? "Deleting" : "Delete"}
         </button>
       )}
-    </section>
+    </div>
   );
 }
