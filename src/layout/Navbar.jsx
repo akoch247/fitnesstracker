@@ -17,6 +17,7 @@ export default function Navbar() {
       <p>Fitness Trackr</p>
       <nav>
         <Link to="/activities">Activities</Link>
+        <Link to="/routines">Routines</Link>
         {token ? (
           <button onClick={handleLogout}>Log Out</button>
         ) : (
