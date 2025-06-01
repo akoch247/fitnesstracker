@@ -14,10 +14,16 @@ export default function ActivityForm() {
     add({ name, description });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new formData(e.target);
+    addActivity(formData);
+  };
+
   return (
     <>
       <h2>Add a new activity</h2>
-      <form action={addActivity}>
+      <form onSubmit={handleSubmit}>
         <label>
           Name
           <input type="text" name="name" />
