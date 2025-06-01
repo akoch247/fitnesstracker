@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "./AuthContext";
 //import { usePage } from "../layout/PageContext";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 
 /** A form that allows users to log into an existing account. */
 export default function Login() {
@@ -21,10 +21,16 @@ export default function Login() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    tryLogin(formData);
+  };
+
   return (
     <>
       <h1>Log in to your account</h1>
-      <form action={tryLogin}>
+      <form onSubmit={handleSubmit}>
         <label>
           Username
           <input type="text" name="username" required />
@@ -33,7 +39,7 @@ export default function Login() {
           Password
           <input type="password" name="password" required />
         </label>
-        <button>Login</button>
+        <button type="submit">Login</button>
         {error && <output>{error}</output>}
       </form>
       <Link to="/register">Need an account? Register here.</Link>

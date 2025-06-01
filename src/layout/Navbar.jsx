@@ -1,11 +1,16 @@
 import { useAuth } from "../auth/AuthContext";
 //import { usePage } from "./PageContext";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 
 /** Navbar with site navigation links */
 export default function Navbar() {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <header>
